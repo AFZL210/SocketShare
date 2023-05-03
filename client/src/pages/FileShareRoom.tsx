@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import RouteError from './RouteError'
+import { Socket } from 'socket.io-client'
 
 interface Props {
     roomId: number
@@ -11,22 +12,22 @@ interface Props {
 
 const FileShareRoom: React.FC<Props> = ({ roomId, socket, username, setRoomId, setUsername }) => {
 
-    if (username === "") return <RouteError />
-
     const [file, setFile] = useState<any>(null)
 
-    const handleFileUpload = (): Promise<void> => {
-        socket.emit("get_file", {
+    const handleFileUpload = (): void => {
+        const data = {
             file: file,
-            ext: file.type.split('/')[1]
-        })
-    }
+            ext: file.type.split('/')[1],
+            roomId: roomId
+        }
 
-    console.log(file, file.type, file.type.split('/')[1])
+        socket.emit("get_file", data)
+        console.log(data)
+    }
 
     return (
         <div>
-            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+            <input type="file" onChange={(e) => setFile(e?.target?.files[0])} />
             <button onClick={handleFileUpload}>Upload</button>
         </div>
     )

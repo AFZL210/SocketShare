@@ -6,6 +6,8 @@ import { Routes, Route } from 'react-router-dom'
 import CreateRoom from '../components/CreateRoom'
 import RouteError from './RouteError'
 import FileShareRoom from './FileShareRoom'
+import RecieveFileRoom from './RecieveFileRoom'
+import GetFile from "./GetFile"
 import { Socket } from 'socket.io-client'
 
 interface Props {
@@ -20,8 +22,10 @@ const HomePage: React.FC<Props> = ({ socket }) => {
         <Routes>
             <Route path='/' element={<Select />} />
             <Route path='join-room' element={<JoinRoom socket={socket} roomId={roomId} username={username} setRoomId={setRoomId} setUsername={setUsername} />} />
+            <Route path='get-room' element={<RecieveFileRoom socket={socket} roomId={roomId} username={username} setRoomId={setRoomId} setUsername={setUsername} />} />
             <Route path='create-room' element={<CreateRoom />} />
             <Route path="share-file/:roomId" element={<FileShareRoom socket={socket} roomId={roomId} username={username} setRoomId={setRoomId} setUsername={setUsername} />} />
+            <Route path="get-file/:roomId" element={<GetFile socket={socket} roomId={roomId} username={username} setRoomId={setRoomId} setUsername={setUsername} />} />
             <Route path='/*' element={<RouteError />} />
         </Routes>
     )
