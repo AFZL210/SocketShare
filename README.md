@@ -6,13 +6,21 @@ easy file sharing
 
 feel free to contribute and add more features
 
+design ideas are welcomed
+
 ### TODO
 
-optimize for large files
+- [x] send and receive room
+- [x] upload file
+- [x] send text-message
+- [ ] select files to download (currently download starts automatically)
+- [ ] update UI (obviously)
+- [ ] handle large files (>5MB)
+- [ ] add file encryption
 
-UI kinda sucks - make it better
 
-currently the file starts to download automatically, allow user to select which files to download
 
-https://user-images.githubusercontent.com/79896602/235895383-2e35599b-8ad3-42ae-a4ad-c5d7bca47923.mp4
+
+
+https://user-images.githubusercontent.com/79896602/235903083-671c7982-622f-4534-926a-b236c6c4da44.mp4
 
