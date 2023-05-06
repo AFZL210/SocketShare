@@ -18,7 +18,8 @@ const FileShareRoom: React.FC<Props> = ({ roomId, socket, username, setRoomId, s
         const data = {
             file: file,
             ext: file.type.split('/')[1],
-            roomId: roomId
+            roomId: roomId,
+            type: file.type
         }
 
         socket.emit("get_file", data)
