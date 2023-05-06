@@ -15,7 +15,9 @@ const io = new Server(server, {
     cors: {
         origin: "http://localhost:5173",
         methods: ["GET", "POST"]
-    }
+    },
+    maxHttpBufferSize: 1e8,
+    pingTimeout: 60000
 })
 
 io.on("connection", (socket) => {
@@ -30,12 +32,15 @@ io.on("connection", (socket) => {
     })
 
     socket.on("get_file", (data: any) => {
-        const { file, ext } = data
+        const { file, ext, type } = data
 
         // test
-        fs.writeFile(`file.${ext}`, file, (err) => {
-            if (!err) console.log('created new file');
-        });
+        socket.to(data.roomId).emit("get_files", data);
+        /**
+         fs.writeFile(`file.${ext}`, file, (err) => {
+             if (!err) console.log('created new file');
+         });
+         **/
     })
 
     // User disconnected
